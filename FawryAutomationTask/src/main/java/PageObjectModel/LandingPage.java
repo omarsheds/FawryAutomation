@@ -21,11 +21,11 @@ public class LandingPage {
         return new LoginPage(driver);
     }
 
-    public VideoGamesPage chooseAllVideoGamesFromAllDropdown(){
+    public void chooseAllVideoGamesFromAllDropdown(){
         driver.findElement(allDropdown).click();
         driver.findElement(seeAllButton).click();
         driver.findElement(gamesOption);
         driver.findElement(allVideoGamesOption);
-        return new VideoGamesPage(driver);
+        //return new VideoGamesPage(driver);
     }
 }
