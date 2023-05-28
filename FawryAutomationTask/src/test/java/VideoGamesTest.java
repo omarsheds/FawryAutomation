@@ -1,6 +1,5 @@
 import PageObjectModel.VideoGamesPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -30,7 +29,7 @@ public class VideoGamesTest {
         driver.manage().window().maximize();
         videoGamesPage.clickOnFreeShippingCheckBox();
         videoGamesPage.clickOnNewCondition();
-        videoGamesPage.selectFromDropDown();
+        videoGamesPage.selectFromSortingDropDownFromHighToLow();
     }
 
 }
