@@ -10,10 +10,10 @@ public class LandingPage {
     By loginButton = By.id("hmenu-customer-name");
 
 
-    public LandingPage(WebDriver driver){this.driver=driver}
+    public LandingPage(WebDriver driver){this.driver=driver;}
 
     public LandingPage clickDropdown(){
-        driver.findElement(dropdownLink).click();
+        driver.findElement(allDropdown).click();
         return this;
     }
 }
