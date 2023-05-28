@@ -7,25 +7,27 @@ public class LandingPage {
 
     WebDriver driver;
     By allDropdown = By.id("nav-hamburger-menu");
-    By loginButton = By.id("hmenu-customer-name");
-    By seeAllButton = By.cssSelector("[class=\"hmenu-item hmenu-compressed-btn\"]");
-
-    By gamesOption = By.cssSelector("a[data-menu-id=\"16\"]");
+    By loginButton = By.linkText("Sign in");
+    By seeAllButton = By.xpath("//div[text()=\"see all\"]");
+    By gamesOption = By.xpath("//div[text()=\"Video Games\"]/parent::a");
     By allVideoGamesOption = By.xpath("//a[text()=\"All Video Games\"]");
 
     public LandingPage(WebDriver driver){this.driver=driver;}
 
-    public LoginPage clickOnLoginButton(){
-        driver.findElement(allDropdown).click();
+    public LoginPage clickOnLoginButton() throws InterruptedException {
+
+        Thread.sleep(1000);
         driver.findElement(loginButton).click();
         return new LoginPage(driver);
     }
 
-    public void chooseAllVideoGamesFromAllDropdown(){
+    public VideoGamesPage chooseAllVideoGamesFromAllDropdown() throws InterruptedException {
         driver.findElement(allDropdown).click();
+        Thread.sleep(1000);
         driver.findElement(seeAllButton).click();
-        driver.findElement(gamesOption);
-        driver.findElement(allVideoGamesOption);
-        //return new VideoGamesPage(driver);
+        Thread.sleep(2000);
+        driver.findElement(gamesOption).click();
+        driver.findElement(allVideoGamesOption).click();
+        return new VideoGamesPage(driver);
     }
 }
