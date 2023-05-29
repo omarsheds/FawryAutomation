@@ -2,6 +2,10 @@ package PageObjectModel;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class LandingPage {
 
@@ -11,22 +15,26 @@ public class LandingPage {
     By seeAllButton = By.xpath("//div[text()=\"see all\"]");
     By gamesOption = By.xpath("//div[text()=\"Video Games\"]/parent::a");
     By allVideoGamesOption = By.xpath("//a[text()=\"All Video Games\"]");
+    WebDriverWait wait;
 
-    public LandingPage(WebDriver driver){this.driver=driver;}
+    public LandingPage(WebDriver driver){
+        this.driver=driver;
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
 
-    public LoginPage clickOnLoginButton() throws InterruptedException {
-
-        Thread.sleep(5000);
+    public LoginPage clickOnLoginButton(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(loginButton));
         driver.findElement(loginButton).click();
         return new LoginPage(driver);
     }
 
-    public VideoGamesPage chooseAllVideoGamesFromAllDropdown() throws InterruptedException {
+    public VideoGamesPage chooseAllVideoGamesFromAllDropdown(){
         driver.findElement(allDropdown).click();
-        Thread.sleep(1000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(seeAllButton));
         driver.findElement(seeAllButton).click();
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(gamesOption));
         driver.findElement(gamesOption).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(allVideoGamesOption));
         driver.findElement(allVideoGamesOption).click();
         return new VideoGamesPage(driver);
     }

@@ -13,36 +13,39 @@ public class VideoGamesPage {
 
     WebDriver driver;
     private By freeShippingCheckBox = By.xpath("//div[@class=\"a-checkbox a-checkbox-fancy aok-float-left apb-browse-refinements-checkbox\"]//i[@class=\"a-icon a-icon-checkbox\"]");
-    private By newCondition = By.xpath("//li[@id=\"p_n_condition-type/28071525031\"]//span[@class=\"a-size-base a-color-base\"]");
-    private By sortList = By.xpath("//span[@class=\"a-button-text a-declarative\"]");
+    private By newCondition = By.xpath("//span[text()=\"New\"]");
+    private By sortList = By.xpath("//span[@class=\"a-button-text a-declarative\"]/ancestor::span[@aria-label=\"Sort by:\"]");
     private By highToLowSelection = By.xpath("//a[text()=\"Price: High to Low\"]");
     private By inventoryItemsPrice= By.xpath("//span[@class=\"a-price-whole\"]");
 
     private By AddToCartButton = By.id("add-to-cart-button");
-    private By itemAddedLabel = By.xpath("//span[contains(text(), 'Added to Cart')]");
-
+    private By noThanksButton = By.xpath("(//div[@class=\"a-button-stack\"]//span[text()=\" No Thanks \"]/preceding-sibling::input[@type=\"submit\"])[1]");
+    private By itemAddedLabel = By.xpath("//input[contains(@value,\"Proceed to checkout\")]");
+    private By cartIcon = By.cssSelector("[href=\"https://www.amazon.eg/-/en/gp/cart/view.html?ref_=nav_cart\"]");
+    private LandingPage lp;
+    WebDriverWait wait;
 
 
     public VideoGamesPage(WebDriver driver){
         this.driver=driver;
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        lp = new LandingPage(driver);
+
     }
 
     public VideoGamesPage clickOnFreeShippingCheckBox(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOfElementLocated(freeShippingCheckBox));
         driver.findElement(freeShippingCheckBox).click();
         return this;
     }
 
     public VideoGamesPage clickOnNewCondition(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOfElementLocated(newCondition));
         driver.findElement(newCondition).click();
         return this;
     }
 
     private WebElement findSortingDropdownElement(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOfElementLocated(sortList));
         return driver.findElement(sortList);
     }
@@ -58,23 +61,36 @@ public class VideoGamesPage {
     }
 
     public VideoGamesPage clickItemLessFifteen() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class=\"a-price-whole\"]")));
 
         List<WebElement> priceElements = driver.findElements(inventoryItemsPrice);
-        for (WebElement element : priceElements) {
-            int price = Integer.parseInt(element.getText().replace(",", ""));
+        for(int i=0 ; i<priceElements.size();i++){
+            priceElements = driver.findElements(inventoryItemsPrice);
+            int price = Integer.parseInt(priceElements.get(i).getText().replace(",", ""));
             if (price < 15000) {
-                element.click();
+                WebElement temp =priceElements.get(i);
+                wait.until(ExpectedConditions.visibilityOf(temp));
+                temp.click();
                 wait.until(ExpectedConditions.visibilityOfElementLocated(AddToCartButton));
                 driver.findElement(AddToCartButton).click();
+                try{
+                new WebDriverWait(driver,Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(noThanksButton));
+                driver.findElement(noThanksButton).click();
+                }catch(Exception e){
+
+                }
                 wait.until(ExpectedConditions.visibilityOfElementLocated(itemAddedLabel));
-                driver.navigate().back();
-                driver.navigate().back();
+                driver.navigate().to("https://www.amazon.eg/s?i=videogames&bbn=18022560031&rh=n%3A18022560031%2Cp_n_free_shipping_eligible%3A21909080031%2Cp_n_condition-type%3A28071525031&s=price-desc-rank&dc&language=en&ds=v1%3A37Ugb%2FcC1AU8LVGV%2BwNCMqWpl2zQMa0oCF9DOW3kGTs&qid=1685394417&rnid=28071523031&ref=sr_st_price-desc-rank");
+
+
             }
         }
         return this;
     }
 
+    public CartPage goToCart(){
+        driver.findElement(cartIcon).click();
+        return new CartPage(driver);
+    }
 
 }

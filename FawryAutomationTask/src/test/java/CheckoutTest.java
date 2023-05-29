@@ -21,8 +21,7 @@ public class CheckoutTest {
             .clickOnFreeShippingCheckBox()
             .clickOnNewCondition()
             .selectFromSortingDropDownFromHighToLow()
-            .clickItemLessFifteen()
-            .selectFromSortingDropDownFromHighToLow();
+            .clickItemLessFifteen();
 
 }
 }
