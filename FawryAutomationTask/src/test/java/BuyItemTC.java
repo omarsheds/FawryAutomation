@@ -14,6 +14,5 @@ public class BuyItemTC {
         driver.get("https://www.amazon.eg/ype%3A28071525031&s=price-desc-rank&dc&language=en&ds=v1%3AJJoCE980BXOxrUi%2BpIUz2W9Vzfr27IPfFVrKi8bThfE&qid=1685294654&rnid=28071523031&ref=sr_st_price-desc-rank");
         BuyItem buyItem = new BuyItem(driver);
         buyItem.clickItemLessFifteen();
-
     }
 }

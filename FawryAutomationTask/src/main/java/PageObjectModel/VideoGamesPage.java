@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class VideoGamesPage {
 
@@ -15,6 +16,11 @@ public class VideoGamesPage {
     private By newCondition = By.xpath("//li[@id=\"p_n_condition-type/28071525031\"]//span[@class=\"a-size-base a-color-base\"]");
     private By sortList = By.xpath("//span[@class=\"a-button-text a-declarative\"]");
     private By highToLowSelection = By.xpath("//a[text()=\"Price: High to Low\"]");
+    private By inventoryItemsPrice= By.xpath("//span[@class=\"a-price-whole\"]");
+
+    private By AddToCartButton = By.id("add-to-cart-button");
+    private By itemAddedLabel = By.xpath("//span[contains(text(), 'Added to Cart')]");
+
 
 
     public VideoGamesPage(WebDriver driver){
@@ -29,6 +35,8 @@ public class VideoGamesPage {
     }
 
     public VideoGamesPage clickOnNewCondition(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(newCondition));
         driver.findElement(newCondition).click();
         return this;
     }
@@ -47,6 +55,25 @@ public class VideoGamesPage {
 
     public By getFreeShippingCheckBox(){
        return freeShippingCheckBox;
+    }
+
+    public VideoGamesPage clickItemLessFifteen() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class=\"a-price-whole\"]")));
+
+        List<WebElement> priceElements = driver.findElements(inventoryItemsPrice);
+        for (WebElement element : priceElements) {
+            int price = Integer.parseInt(element.getText().replace(",", ""));
+            if (price < 15000) {
+                element.click();
+                wait.until(ExpectedConditions.visibilityOfElementLocated(AddToCartButton));
+                driver.findElement(AddToCartButton).click();
+                wait.until(ExpectedConditions.visibilityOfElementLocated(itemAddedLabel));
+                driver.navigate().back();
+                driver.navigate().back();
+            }
+        }
+        return this;
     }
 
 

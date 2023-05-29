@@ -16,7 +16,7 @@ public class LandingPage {
 
     public LoginPage clickOnLoginButton() throws InterruptedException {
 
-        Thread.sleep(1000);
+        Thread.sleep(5000);
         driver.findElement(loginButton).click();
         return new LoginPage(driver);
     }
