@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VideoGamesPage {
@@ -22,14 +23,15 @@ public class VideoGamesPage {
     private By noThanksButton = By.xpath("(//div[@class=\"a-button-stack\"]//span[text()=\" No Thanks \"]/preceding-sibling::input[@type=\"submit\"])[1]");
     private By itemAddedLabel = By.xpath("//input[contains(@value,\"Proceed to checkout\")]");
     private By cartIcon = By.cssSelector("[href=\"https://www.amazon.eg/-/en/gp/cart/view.html?ref_=nav_cart\"]");
-    private LandingPage lp;
-    WebDriverWait wait;
+    private By productTitle = By.xpath("//span[@id=\"productTitle\"]");
+    private WebDriverWait wait;
+    private StringBuffer sb;
+    public static List<String> productNames;
 
 
     public VideoGamesPage(WebDriver driver){
         this.driver=driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        lp = new LandingPage(driver);
 
     }
 
@@ -62,7 +64,7 @@ public class VideoGamesPage {
 
     public VideoGamesPage clickItemLessFifteen() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class=\"a-price-whole\"]")));
-
+        productNames = new ArrayList<>();
         List<WebElement> priceElements = driver.findElements(inventoryItemsPrice);
         for(int i=0 ; i<priceElements.size();i++){
             priceElements = driver.findElements(inventoryItemsPrice);
@@ -71,6 +73,8 @@ public class VideoGamesPage {
                 WebElement temp =priceElements.get(i);
                 wait.until(ExpectedConditions.visibilityOf(temp));
                 temp.click();
+                wait.until(ExpectedConditions.visibilityOfElementLocated(productTitle));
+                productNames.add(driver.findElement(productTitle).getText());
                 wait.until(ExpectedConditions.visibilityOfElementLocated(AddToCartButton));
                 driver.findElement(AddToCartButton).click();
                 try{
