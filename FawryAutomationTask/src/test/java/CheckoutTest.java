@@ -20,6 +20,8 @@ public class CheckoutTest {
             .chooseAllVideoGamesFromAllDropdown()
             .clickOnFreeShippingCheckBox()
             .clickOnNewCondition()
+            .selectFromSortingDropDownFromHighToLow()
+            .clickItemLessFifteen()
             .selectFromSortingDropDownFromHighToLow();
 
 }

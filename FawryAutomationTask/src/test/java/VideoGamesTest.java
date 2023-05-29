@@ -30,6 +30,7 @@ public class VideoGamesTest {
         videoGamesPage.clickOnFreeShippingCheckBox();
         videoGamesPage.clickOnNewCondition();
         videoGamesPage.selectFromSortingDropDownFromHighToLow();
+
     }
 
 }
