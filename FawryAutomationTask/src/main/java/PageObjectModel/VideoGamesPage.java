@@ -96,10 +96,6 @@ public class VideoGamesPage {
         return this;
     }
 
-    public String  isListSortedFromHighToLow(){
-        WebElement element = driver.findElement(sortingType);
-        return element.getText();
-    }
     public CartPage goToCart(){
         driver.findElement(cartIcon).click();
         return new CartPage(driver);
