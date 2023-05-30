@@ -24,6 +24,9 @@ public class VideoGamesPage {
     private By itemAddedLabel = By.xpath("//input[contains(@value,\"Proceed to checkout\")]");
     private By cartIcon = By.cssSelector("[href=\"https://www.amazon.eg/-/en/gp/cart/view.html?ref_=nav_cart\"]");
     private By productTitle = By.xpath("//span[@id=\"productTitle\"]");
+
+    private By sortingType = By.xpath("//span[text()=\"Price: High to Low\"]");
+
     private WebDriverWait wait;
     private StringBuffer sb;
     public static List<String> productNames;
@@ -95,6 +98,11 @@ public class VideoGamesPage {
     public CartPage goToCart(){
         driver.findElement(cartIcon).click();
         return new CartPage(driver);
+    }
+
+    public String  isListSortedFromHighToLow(){
+        WebElement element = driver.findElement(sortingType);
+        return element.getText();
     }
 
 }
