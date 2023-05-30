@@ -1,22 +1,18 @@
-import PageObjectModel.LandingPage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.Test;
+package testcases;
 
-public class CheckoutTest {
+import PageObjectModel.LandingPage;
+import base.BaseTest;
+import org.testng.annotations.Test;
+import utils.ConfigUtils;
+
+public class AddItemsTest extends BaseTest {
 
 @Test
     public void NavigateToAllGames() throws InterruptedException {
-    ChromeOptions options = new ChromeOptions();
-    options.addArguments("--remote-allow-origins=*");
-    WebDriver driver = new ChromeDriver(options);
-    driver.get("https://www.amazon.eg/?language=en_AE");
     LandingPage lp = new LandingPage(driver);
-
     lp
             .clickOnLoginButton()
-            .LoginUsingEmailOrNumber("+201126824551","anaomar999")
+            .LoginUsingEmailOrNumber(ConfigUtils.getInstanceofConfigUtils().getEmailOrNumber(),ConfigUtils.getInstanceofConfigUtils().getPassword())
             .chooseAllVideoGamesFromAllDropdown()
             .clickOnFreeShippingCheckBox()
             .clickOnNewCondition()
