@@ -1,9 +1,10 @@
-package utils;
+package testcases;
 
 import PageObjectModel.CheckoutPage;
 import PageObjectModel.LandingPage;
 import base.BaseTest;
 import org.testng.annotations.Test;
+import utils.ConfigUtils;
 
 public class CheckoutTest extends BaseTest {
 
@@ -19,8 +20,15 @@ public class CheckoutTest extends BaseTest {
                 .goToCheckoutPage()
                 .clickOnChangeAddress()
                 .clickOnAddNewAddress()
-                .clickOnCountryDropdown()
-                .clickOnEgypt();
+                .enterFullName(ConfigUtils.getInstanceofConfigUtils().fullName())
+                .enterPhoneNumber(ConfigUtils.getInstanceofConfigUtils().phoneNumber())
+                .enterStreetName(ConfigUtils.getInstanceofConfigUtils().streetName())
+                .enterBuildingNumber(ConfigUtils.getInstanceofConfigUtils().buildingNumber())
+                .enterCity(ConfigUtils.getInstanceofConfigUtils().city())
+                .enterDistrict(ConfigUtils.getInstanceofConfigUtils().district())
+                .enterNearestLandmark(ConfigUtils.getInstanceofConfigUtils().landmark())
+                .clickOnAddAddress();
+
 
     }
 

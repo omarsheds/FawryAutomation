@@ -89,8 +89,6 @@ public class VideoGamesPage {
                 }
                 wait.until(ExpectedConditions.visibilityOfElementLocated(itemAddedLabel));
                 driver.navigate().to("https://www.amazon.eg/s?i=videogames&bbn=18022560031&rh=n%3A18022560031%2Cp_n_free_shipping_eligible%3A21909080031%2Cp_n_condition-type%3A28071525031&s=price-desc-rank&dc&language=en&ds=v1%3A37Ugb%2FcC1AU8LVGV%2BwNCMqWpl2zQMa0oCF9DOW3kGTs&qid=1685394417&rnid=28071523031&ref=sr_st_price-desc-rank");
-
-
             }
         }
         return this;

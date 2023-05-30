@@ -34,4 +34,50 @@ public class ConfigUtils {
         if(prop != null) { return prop; }
         throw new RuntimeException("Couldn't Find the password in the property file ");
     }
+
+    public String fullName() {
+        String prop = properties.getProperty("fullName");
+        if(prop != null) { return prop; }
+        throw new RuntimeException("Couldn't Find the password in the property file ");
+    }
+
+    public String phoneNumber() {
+        String prop = properties.getProperty("phoneNumber");
+        if(prop != null) { return prop; }
+        throw new RuntimeException("Couldn't Find the password in the property file ");
+    }
+
+    public String streetName() {
+        String prop = properties.getProperty("streetname");
+        if(prop != null) { return prop; }
+        throw new RuntimeException("Couldn't Find the password in the property file ");
+    }
+
+    public String buildingNumber() {
+        String prop = properties.getProperty("Buildingnumber");
+        if(prop != null) { return prop; }
+        throw new RuntimeException("Couldn't Find the password in the property file ");
+    }
+
+    public String city() {
+        String prop = properties.getProperty("city");
+        if(prop != null) { return prop; }
+        throw new RuntimeException("Couldn't Find the password in the property file ");
+    }
+
+    public String district() {
+        String prop = properties.getProperty("district");
+        if(prop != null) { return prop; }
+        throw new RuntimeException("Couldn't Find the password in the property file ");
+    }
+
+    public String landmark() {
+        String prop = properties.getProperty("landmark");
+        if(prop != null) { return prop; }
+        throw new RuntimeException("Couldn't Find the password in the property file ");
+    }
+
+
+
+
 }
